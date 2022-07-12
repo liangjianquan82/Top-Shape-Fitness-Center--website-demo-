@@ -1,0 +1,230 @@
+<!-- -------------------------------------------------------
+Final Project
+Written by: Jean Paul Enrique 2195421 and Jianguan Liang 2201546 
+*Jean Paul responsibilities include: conception design, html, css, table, images, logo
+*Jianguan responsibilities include: conception design, html, table, form
+For “Front-End Web Programming” Section 05807– Winter 2022
+// -------------------------------------------------------- -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>
+Membership
+</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+
+	<script>
+	function Addorder(){
+		var x = document.getElementById("list").insertRow(1);
+		var y0 = x.insertCell(0);
+		var y1 = x.insertCell(1);
+		var y2 = x.insertCell(2);	
+		
+		if(document.getElementById("Monthlycard").checked==true){
+			var myselectcard = document.getElementById("Monthlycard");	
+//			alert(myselectcard);
+			var selectText = "Monthly card";
+			var selectvalue = myselectcard.value;
+//			alert(selectvalue);
+			var Quantity = document.getElementById("Mquantity").value;
+//			alert(Quantity);
+			var Price =  parseFloat(selectvalue)*Quantity;
+//				alert(Price);
+			y0.innerHTML = selectText;
+			y1.innerHTML = Quantity;
+			y2.innerHTML = "$"+Price;
+			
+		}		
+		else if(document.getElementById("Annualcard").checked==true){
+			var myselectcard = document.getElementById("Annualcard");	
+			var selectText = "Annual card";
+			var selectvalue = myselectcard.value;
+			var Quantity = document.getElementById("Aquantity").value;
+			var Price =  parseFloat(selectvalue)*Quantity;
+			y0.innerHTML = selectText;
+			y1.innerHTML = Quantity;
+			y2.innerHTML = "$"+Price;			
+		}
+		
+		if(document.getElementById("Ordinary").checked==true){
+			var x1 = document.getElementById("list").insertRow(1);
+			var y00 = x1.insertCell(0);
+			var y11 = x1.insertCell(1);
+			var y22 = x1.insertCell(2);	
+			var myselectcard = document.getElementById("Ordinary");	
+			var selectText = "Ordinary coach";
+			var selectvalue = myselectcard.value;
+			var Quantity = document.getElementById("Oquantity").value;
+			var Price =  parseFloat(selectvalue)*Quantity;
+			y00.innerHTML = selectText;
+			y11.innerHTML = Quantity;
+			y22.innerHTML = "$"+Price;			
+		}
+		if(document.getElementById("Professional").checked==true){
+			var x1 = document.getElementById("list").insertRow(1);
+			var y00 = x1.insertCell(0);
+			var y11 = x1.insertCell(1);
+			var y22 = x1.insertCell(2);	
+			var myselectcard = document.getElementById("Professional");		
+			var selectText = "Professional coach";
+			var selectvalue = myselectcard.value;
+			var Quantity = document.getElementById("Pquantity").value;
+			var Price =  parseFloat(selectvalue)*Quantity;
+			y00.innerHTML = selectText;
+			y11.innerHTML = Quantity;
+			y22.innerHTML = "$"+Price;			
+		}
+		
+		var tableid = document.getElementById("list");
+		var str='0';
+		var value;
+		var i;
+		for(i=1;i<tableid.rows.length-1;i++){
+				value = tableid.rows[i].cells[2].innerHTML.replace('$','');					
+				
+				str = (parseFloat(str))+ (parseFloat(value));
+		}
+		document.getElementById("total").innerHTML =  "$"+str;
+	}
+
+	function reset1(){
+		document.getElementById("Monthlycard").checked=true;
+		document.getElementById("Annualcard").checked=false;
+		document.getElementById("Ordinary").checked=false;
+		document.getElementById("Professional").checked=false;
+		document.getElementById("Mquantity").value = "1";
+		document.getElementById("Aquantity").value = "1";
+		document.getElementById("Oquantity").value = "1";
+		document.getElementById("Pquantity").value = "1";
+		
+		document.getElementById("total").innerHTML =  "";
+		deletetable();
+	}
+	function deletetable(){
+		var tableid = document.getElementById("list");
+		var i=1;
+		var len = tableid.rows.length;
+
+		if(len>2){
+			for(i=1;i<tableid.rows.length-1;i++){
+				tableid.rows[i].remove();	
+			}
+			deletetable()
+		}else return;
+	}
+</script>
+</head>
+
+<body>
+<div id="wrapper">
+<header>
+	<div class="header">
+		<img src="images/top_shape_logo.gif" alt="logo" />
+		<h1>Top Shape Fitness Center</h1>
+	</div>
+</header>
+
+<nav class="sidebar">
+		<nav>
+			<li><a href="index.html"><b>Home</b></a></li>
+			<li><a href="about us.html"><b>About Us</b></a></li>
+			<li><a href="schedule.html"><b>Schedule</b></a></li>
+			<li><a href="coach profiles.html"><b>Coach Profiles</b></a></li>
+			<li><a href="membership.html"><b>Membership</b></a></li>
+			<li><a href="gallery.html"><b>Gallery</b></a></li>
+			<li><a href="contact.html"><b>Contact</b></a></li>
+		</nav>
+
+	<div id="address"> 
+    <aside> Top Shape Fitness Center </aside>
+    <aside> René-Lévesque Boulevard</aside>
+    <aside> Montréal, QC H3W 0B1 <br /><br /> </aside>
+  </div>
+</nav>
+
+<main>
+	<h3>Contact Us Today!</h3>
+	<p>Welcome to buy Top Shape fitness center membership card. Our membership card is divided into monthly card and annual card, and you can also choose a coach to help you develop a fitness plan. don't miss it.</p>
+  <table border="2">
+    <caption><b>Card</b></caption>
+    <thead>
+      <tr>
+        <th>&nbsp;  </th>
+        <th> Membership card </th>
+        <th> Quantity </th>
+		  <th> Price </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="radio" name="card" value="50" id="Monthlycard"checked></td>
+        <td class="fit">Monthly card</td>
+        <td><input id="Mquantity" size="5" type="text" value="1">&nbsp;</td>
+		  <td>$50/month</td>
+      </tr> 
+      <tr class="row-2">
+        <td><input type="radio" name="card" value="500" id="Annualcard"></td>
+        <td class="fit">Annual card</td>
+        <td><input id="Aquantity" size="5" type="text" value="1" >&nbsp;</td>
+		  <td>$500/year</td>
+      </tr>
+    </tbody>
+  </table>  
+  
+  <table border="2">
+    <caption><b>Coach</b></caption>
+    <thead>
+      <tr>
+        <th>  </th>
+        <th> Coach classification </th>
+        <th> Quantity </th>
+		  <th> Price </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><input type="checkbox" id="Ordinary" value="15"></td>
+        <td class="fit">Ordinary coach</td>
+        <td><input id="Oquantity" size="5" type="text" value="1">&nbsp;</td>
+		  <td>$15/times</td>
+      </tr> 
+      <tr class="row-2">
+        <td><input type="checkbox" id="Professional" value="25"></td>
+        <td class="fit">Professional coach</td>
+        <td><input id="Pquantity" size="5" type="text" value="1">&nbsp;</td>
+		  <td>$25/times</td>
+      </tr>      
+    </tbody>
+	  </table>
+	<div id="bu"><input type="button" value="Add" onClick="Addorder()">  <input type="reset" value="Reset" onClick="reset1()">  
+	</div><br><br>
+	<table border="2" id="list">
+    <caption><b>&nbsp;</b></caption>
+    <thead>
+      <tr>
+        <th> Items </th>
+        <th>Quantity </th>       
+		  <th> Price </th>
+      </tr>
+    </thead>
+    
+     
+      <tr class="Total">
+        
+        <td class="fit" >Total Price:</td>
+        <td></td>
+		  <td><label id="total"></label></td>
+      </tr>
+  </table>
+</main>
+
+<footer>
+	Copyright &copy; Top Shape Fitness Center <br />
+	<u><a href="https://www.google.com/gmail/"> Contact Us</a></u> <br />
+</footer>
+
+</div>
+</body>
+</html>
